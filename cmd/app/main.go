@@ -7,9 +7,10 @@ import (
   Endpoints "github.com/Couches/blog-aggregator/internal/endpoints"
 
 	"github.com/joho/godotenv"
+  _ "github.com/lib/pq"
 )
 
-var configPath string = "settings.yml"
+var configPath string = "settings.yaml"
 
 func main() {
   godotenv.Load()

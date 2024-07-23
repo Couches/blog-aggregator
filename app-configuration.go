@@ -10,6 +10,9 @@ type AppConfiguration struct {
   Server struct {
     Address string `yaml:"address"`
   } `yaml:"server"`
+  Database struct {
+    ConnectionString string `yaml:"connection_string"`
+  } `yaml:"database"`
 }
 
 func LoadAppConfiguration(path string) (AppConfiguration, error) {
