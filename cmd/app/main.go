@@ -1,13 +1,17 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"net/http"
-  BA "github.com/Couches/blog-aggregator"
-  Endpoints "github.com/Couches/blog-aggregator/internal/endpoints"
+	"os"
+
+	BA "github.com/Couches/blog-aggregator"
+	"github.com/Couches/blog-aggregator/internal/database"
+	Endpoints "github.com/Couches/blog-aggregator/internal/endpoints"
 
 	"github.com/joho/godotenv"
-  _ "github.com/lib/pq"
+	_ "github.com/lib/pq"
 )
 
 var configPath string = "settings.yaml"
@@ -19,6 +23,16 @@ func main() {
   if err != nil {
     fmt.Println("Failed to load app configurations at \"%v\" with error: %v", configPath, err)
   }
+
+  db, err := sql.Open("postgres", os.Getenv("CONNECTION_STRING"))
+  if err != nil {
+    fmt.Println(err.Error())
+  }
+
+  dbQueries := database.New(db)
+  config.Database.Queries = dbQueries
+
+  fmt.Println(config)
 
   mux := http.NewServeMux()
 

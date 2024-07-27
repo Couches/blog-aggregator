@@ -43,5 +43,10 @@ var endpoints []Endpoint = []Endpoint {
     Route: "/v1/err",
     Callback: Error,
   },
+  Endpoint {
+    Method: "POST",
+    Route: "/v1/users",
+    Callback: CreateUser,
+  },
 }
 

@@ -3,6 +3,7 @@ package blogaggregator
 import (
 	"os"
 
+	"github.com/Couches/blog-aggregator/internal/database"
 	"gopkg.in/yaml.v3"
 )
 
@@ -12,6 +13,7 @@ type AppConfiguration struct {
   } `yaml:"server"`
   Database struct {
     ConnectionString string `yaml:"connection_string"`
+    Queries *database.Queries
   } `yaml:"database"`
 }
 
